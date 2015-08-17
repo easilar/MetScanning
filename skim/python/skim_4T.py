@@ -36,7 +36,7 @@ process.source = cms.Source(
 #"file:/data/rschoefbeck/pickEvents/nick/pickevents_4.root", 
 #"file:/data/rschoefbeck/pickEvents/nick/pickevents_5.root", 
 #"file:/data/dspitzbart/Spring15/eventsWjetOutliers/pickevents.root"
-"file:/afs/cern.ch/work/e/easilar/dirEceFork/CMSSW_7_4_7/src/Workspace/RA4Analysis/plotsEce/pickevents_mu.root"
+"file:/afs/cern.ch/work/e/easilar/dirEceFork/CMSSW_7_4_7/src/Workspace/RA4Analysis/plotsEce/pickevents_dPhi3_07.root"
 )
     )
 
