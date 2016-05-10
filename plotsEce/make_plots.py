@@ -11,7 +11,7 @@ plot_vars = ["pfJet_phi"]
 plot_vars_2D = ["pfMETPt:pfJet_pt[0]","pfMETPhi:pfJet_phi[0]"]
 
 filters = ["filter_csc2015","filter_globaltighthalo2016","filter_globalsupertighthalo2016","filter_hcalstriphalo",\
-          "filter_hbher1","filter_hbher2l","filter_hbher2t","filter_hbheiso","filter_ecaltp","filter_ecalsc"]
+          "filter_hbher2l","filter_hbher2t","filter_ecaltp","filter_ecalsc","filter_hbheiso"]
 
 additional_cuts = ["(pfMETPt>=90||caloMETPt>=90)"]
 
@@ -68,8 +68,8 @@ if filter_flow:
     c.GetPlayer().SetScanRedirect(1)
     c.GetPlayer().SetScanFileName("/afs/hephy.at/user/e/easilar/www/METPhiScanning/filter_flow/scan_result.txt")
     scan_string = ":".join([filter_n for filter_n in filters])
-    #c.Scan("run:lumi:event:caloMETPt:pfMETPt:"+scan_string,"(pfMETPt>=90||caloMETPt>=90)")
-    c.Scan("run:lumi:event:caloMETPt:pfMETPt:filter_hbher1","(pfMETPt>=90||caloMETPt>=90)")
+    #c.Scan("run:lumi:event:caloMETPt:pfMETPt:"+scan_string,"(pfMETPt>=90||caloMETPt>=90)&&!(filter_hbheiso)")
+    c.Scan("run:lumi:event:caloMETPt:pfMETPt:"+scan_string,"!(filter_hbheiso)")
     #c.Scan("run:lumi:event:caloMETPt:pfMETPt",cut)
 
 ofile.write("\n")

@@ -1,77 +1,24 @@
-from CRABClient.UserUtilities import config
-#submit with 'python crab.py'
-#Don't write to my directory (schoef), though
-
-## define only these variables here
-
-production = "crab3/Run2016B/"
-json       = "json/dummyRunB.json"
-site       = "T2_AT_Vienna"
-outdir     = "/store/user/easilar/crab3/Run2016B/"
-
-
-## do not touch beyond this point
-
+from CRABClient.UserUtilities import config, getUsernameFromSiteDB
 config = config()
-config.General.requestName   = 'SingleElectron_Run2016B_PromptReco_v1_RECO'
-config.General.workArea      = production
 
-#config.JobType.outputFiles   = ['tuple.root']
-config.JobType.pluginName    = 'Analysis'
-config.JobType.psetName      = '../python/skim_Electron.py'
+config.General.requestName = 'SingleElectron_Run2016B_PromptReco_v1_RECO'
+config.General.workArea = 'crab3/Run2016B/'
+config.General.transferOutputs = True
+config.General.transferLogs = True
+config.JobType.outputFiles   = ['tuple.root']
 
-config.Data.inputDataset     = '/SingleElectron/Run2016B-PromptReco-v1/RECO'
-config.Data.inputDBS         = 'global'
-config.Data.lumiMask         = json
-config.Data.splitting        = 'LumiBased'
-#config.Data.splitting = 'FileBased'
-config.Data.unitsPerJob      = 20
+config.JobType.pluginName = 'Analysis'
+config.JobType.psetName = '../python/skim_Electron.py'
 
-config.Data.publication      = False
-#config.Data.outLFNDirBase   = '' 
-#config.Data.publishDataName = ''
+config.Data.inputDataset = '/SingleElectron/Run2016B-PromptReco-v1/RECO'
+config.Data.inputDBS = 'global'
+config.Data.splitting = 'LumiBased'
+config.Data.unitsPerJob = 20
+config.Data.lumiMask = 'https://cms-service-dqm.web.cern.ch/cms-service-dqm/CAF/certification/Collisions16/13TeV/DCSOnly/json_DCSONLY.txt'
+#config.Data.runRange = '193093-193999' # '193093-194075'
+config.Data.outLFNDirBase = '/store/user/%s/' % (getUsernameFromSiteDB())
+config.Data.publication = False
+config.Data.outputDatasetTag = 'SingleElectron_Run2016B_PromptReco_v1_RECO'
 
-config.Data.outLFNDirBase    = outdir
-config.Site.storageSite      = site
-
-datasets=[
-'/SingleElectron/Run2016B-PromptReco-v1/RECO'
-#'/BTagCSV/Run2015B-PromptReco-v1/RECO',
-#'/BTagMu/Run2015B-PromptReco-v1/RECO',
-#'/Charmonium/Run2015B-PromptReco-v1/RECO',
-#'/DoubleEG/Run2015B-PromptReco-v1/RECO',
-#'/DoubleMuon/Run2015B-PromptReco-v1/RECO',
-#'/EGamma/Run2015B-PromptReco-v1/RECO',
-#'/ExpressPhysics/Run2015B-Express-v1/FEVT',
-#'/Jet/Run2015B-PromptReco-v1/RECO',
-#'/JetHT/Run2015B-PromptReco-v1/RECO',
-#'/HighMultiplicity/Run2015B-PromptReco-v1/RECO',
-#'/HTMHT/Run2015B-PromptReco-v1/RECO',
-#'/MET/Run2015B-PromptReco-v1/RECO',
-#'/MinimumBias/Run2015B-PromptReco-v1/RECO',
-#'/MuonEG/Run2015B-PromptReco-v1/RECO',
-#'/SingleElectron/Run2015B-PromptReco-v1/RECO',
-#'/SingleMuon/Run2015B-PromptReco-v1/RECO',
-#'/SinglePhoton/Run2015B-PromptReco-v1/RECO',
-#'/Tau/Run2015B-PromptReco-v1/RECO',
-#'/ZeroBias/Run2015B-PromptReco-v1/RECO',
-#'/ZeroBias1/Run2015B-PromptReco-v1/RECO',
-#'/ZeroBias2/Run2015B-PromptReco-v1/RECO',
-#'/ZeroBias3/Run2015B-PromptReco-v1/RECO',
-#'/ZeroBias4/Run2015B-PromptReco-v1/RECO',
-#'/ZeroBias5/Run2015B-PromptReco-v1/RECO',
-#'/ZeroBias6/Run2015B-PromptReco-v1/RECO',
-#'/ZeroBias7/Run2015B-PromptReco-v1/RECO',
-#'/ZeroBias8/Run2015B-PromptReco-v1/RECO',
-]
-
-if __name__ == '__main__':
-    from CRABAPI.RawCommand import crabCommand
-    for dataset in datasets:
-        config.Data.inputDataset = dataset
-        config.General.requestName = dataset.rstrip('/').lstrip('/').replace('/','_') + "_reco"
-#        print config.General.requestName
-        crabCommand('submit', config = config)
-
-
+config.Site.storageSite = "T2_AT_Vienna"
 
