@@ -4,26 +4,27 @@ from CRABClient.UserUtilities import config
 
 ## define only these variables here
 
-production = "/afs/cern.ch/work/c/cheidegg/crab3/2015-08-24_dummy_runb"
+production = "crab3/Run2016B/"
 json       = "json/dummyRunB.json"
-site       = "T3_CH_PSI"
-outdir     = "/store/user/cheidegg/crab3/2015-08-24_dummy_runb/"
+site       = "T2_AT_Vienna"
+outdir     = "/store/user/easilar/crab3/Run2016B/"
 
 
 ## do not touch beyond this point
 
 config = config()
-config.General.requestName   = 'ZeroBias1_Run2015A-PromptReco-v1_RECO'
+config.General.requestName   = 'SingleElectron_Run2016B_PromptReco_v1_RECO'
 config.General.workArea      = production
 
 #config.JobType.outputFiles   = ['tuple.root']
 config.JobType.pluginName    = 'Analysis'
-config.JobType.psetName      = '../python/skimReco.py'
+config.JobType.psetName      = '../python/skim_Electron.py'
 
-config.Data.inputDataset     = '/ZeroBias1/Run2015A-PromptReco-v1/RECO'
+config.Data.inputDataset     = '/SingleElectron/Run2016B-PromptReco-v1/RECO'
 config.Data.inputDBS         = 'global'
 config.Data.lumiMask         = json
 config.Data.splitting        = 'LumiBased'
+#config.Data.splitting = 'FileBased'
 config.Data.unitsPerJob      = 20
 
 config.Data.publication      = False
@@ -34,13 +35,14 @@ config.Data.outLFNDirBase    = outdir
 config.Site.storageSite      = site
 
 datasets=[
+'/SingleElectron/Run2016B-PromptReco-v1/RECO'
 #'/BTagCSV/Run2015B-PromptReco-v1/RECO',
 #'/BTagMu/Run2015B-PromptReco-v1/RECO',
 #'/Charmonium/Run2015B-PromptReco-v1/RECO',
 #'/DoubleEG/Run2015B-PromptReco-v1/RECO',
 #'/DoubleMuon/Run2015B-PromptReco-v1/RECO',
 #'/EGamma/Run2015B-PromptReco-v1/RECO',
-'/ExpressPhysics/Run2015B-Express-v1/FEVT',
+#'/ExpressPhysics/Run2015B-Express-v1/FEVT',
 #'/Jet/Run2015B-PromptReco-v1/RECO',
 #'/JetHT/Run2015B-PromptReco-v1/RECO',
 #'/HighMultiplicity/Run2015B-PromptReco-v1/RECO',
