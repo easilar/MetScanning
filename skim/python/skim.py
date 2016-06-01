@@ -34,7 +34,8 @@ process.source = cms.Source(
     "PoolSource",
     fileNames = cms.untracked.vstring(
         #'file:/hdfs/store/user/khurana/MET/crab_MET_Run2016B-PromptReco-v2_RECO/160524_134615/0000/skim_406.root'
-        'root://xrootd.unl.edu//store/express/Run2016B/ExpressPhysics/FEVT/Express-v1/000/272/007/00000/84DC1CFA-830D-E611-9BFC-02163E012058.root'
+        #'root://xrootd.unl.edu//store/express/Run2016B/ExpressPhysics/FEVT/Express-v1/000/272/007/00000/84DC1CFA-830D-E611-9BFC-02163E012058.root'
+        'root://xrootd.unl.edu//store/express/Run2016B/ExpressPhysics/FEVT/Express-v1/000/272/008/00000/00100D61-870D-E611-9B62-02163E01470B.root'
 )
     )
 
@@ -54,7 +55,7 @@ process.out = cms.OutputModule(
 ##____________________________________________________________________________||
 process.options   = cms.untracked.PSet(wantSummary = cms.untracked.bool(True))
 process.MessageLogger.cerr.FwkReport.reportEvery = 50
-process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(20) )
+process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(-1) )
 
 
 ##___________________________CSC_Halo_Filter__________________________________||
@@ -77,7 +78,6 @@ process.globalSuperTightHalo2016Filter.taggingMode = cms.bool(True)
 process.load('CommonTools.RecoAlgos.HBHENoiseFilterResultProducer_cfi')
 process.HBHENoiseFilterResultProducer.minZeros = cms.int32(99999)
 process.HBHENoiseFilterResultProducer.IgnoreTS4TS5ifJetInLowBVRegion=cms.bool(False)
-
 
 #process.ApplyBaselineHBHENoiseFilter = cms.EDFilter('BooleanFlagFilter',
 #    inputLabel = cms.InputTag('HBHENoiseFilterResultProducer','HBHENoiseFilterResult'),
