@@ -34,6 +34,8 @@ METScanningNtupleMaker::METScanningNtupleMaker(const edm::ParameterSet& iConfig)
   RecHitsEE_token = consumes<EcalRecHitCollection>(iConfig.getParameter<edm::InputTag>("EERecHits"));
   RecHitsES_token = consumes<EcalRecHitCollection>(iConfig.getParameter<edm::InputTag>("ESRecHits"));
   hSummary_token = consumes<HcalNoiseSummary>(iConfig.getParameter<edm::InputTag>("HcalNoise"));
+  BadChCandF_token = consumes<bool>(iConfig.getParameter<edm::InputTag>("BadChCandFilter"));
+  
   
 
   // The root tuple
@@ -60,6 +62,7 @@ METScanningNtupleMaker::METScanningNtupleMaker(const edm::ParameterSet& iConfig)
   s->Branch("filter_hbheiso",&filterhbheiso,"filter_hbheiso/O");
   s->Branch("filter_ecaltp",&filterecaltp,"filter_ecaltp/O");
   s->Branch("filter_ecalsc",&filterecalsc,"filter_ecalsc/O");
+  s->Branch("filter_badChCand",&filterbadChCandidate,"filter_badChCand/O");
 
   //Leptons =====================================
   s->Branch("pfLepton_pt"             , &pfLepton_pt   );  
@@ -237,6 +240,10 @@ METScanningNtupleMaker::analyze(const Event& iEvent,
   if( hSummary->maxHPDHits()               >= 17                           ) filterhbher1nozeros = false;
   if( hSummary->maxHPDNoOtherHits()        >= 10                           ) filterhbher1nozeros = false;
   if( hSummary->HasBadRBXTS4TS5() && !hSummary->goodJetFoundInLowBVRegion()) filterhbher1nozeros = false;
+
+  Handle<bool> ifilterbadChCand;
+  iEvent.getByToken(BadChCandF_token, ifilterbadChCand);
+  filterbadChCandidate = *ifilterbadChCand;
   
   
   // get Leptons

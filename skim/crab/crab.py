@@ -13,10 +13,11 @@ config.JobType.psetName = '../python/skim.py'
 config.JobType.outputFiles = ['tuple.root']
 config.Data.inputDataset = '/ExpressPhysics/Run2016B-Express-v1/FEVT'  #'/ZeroBias1/Run2015A-PromptReco-v1/RECO'
 config.Data.inputDBS = 'global'
-config.Data.lumiMask =  'https://cms-service-dqm.web.cern.ch/cms-service-dqm/CAF/certification/Collisions16/13TeV/DCSOnly/json_DCSONLY.txt' #'json/Cert_251562-251883_13TeV_PromptReco_Collisions15_JSON_UPDATEONLY.txt'
+#config.Data.lumiMask =  'https://cms-service-dqm.web.cern.ch/cms-service-dqm/CAF/certification/Collisions16/13TeV/DCSOnly/json_DCSONLY.txt' #'json/Cert_251562-251883_13TeV_PromptReco_Collisions15_JSON_UPDATEONLY.txt'
+config.Data.lumiMask =  'https://cms-service-dqm.web.cern.ch/cms-service-dqm/CAF/certification/Collisions16/13TeV/Cert_271036-273730_13TeV_PromptReco_Collisions16_JSON.txt' #'json/Cert_251562-251883_13TeV_PromptReco_Collisions15_JSON_UPDATEONLY.txt'
 config.Data.splitting = 'LumiBased'
 config.Data.unitsPerJob = 10
-config.Data.runRange = '272818'
+#config.Data.runRange = '272818'
 config.Data.publication = False
 
 #config.Data.ignoreLocality = True                                                                                                                                                                       
