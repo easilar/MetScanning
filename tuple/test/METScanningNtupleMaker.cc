@@ -35,6 +35,7 @@ METScanningNtupleMaker::METScanningNtupleMaker(const edm::ParameterSet& iConfig)
   RecHitsES_token = consumes<EcalRecHitCollection>(iConfig.getParameter<edm::InputTag>("ESRecHits"));
   hSummary_token = consumes<HcalNoiseSummary>(iConfig.getParameter<edm::InputTag>("HcalNoise"));
   BadChCandF_token = consumes<bool>(iConfig.getParameter<edm::InputTag>("BadChCandFilter"));
+  BadPFMuon_token = consumes<bool>(iConfig.getParameter<edm::InputTag>("BadPFMuon"));
   
   
 
@@ -63,6 +64,7 @@ METScanningNtupleMaker::METScanningNtupleMaker(const edm::ParameterSet& iConfig)
   s->Branch("filter_ecaltp",&filterecaltp,"filter_ecaltp/O");
   s->Branch("filter_ecalsc",&filterecalsc,"filter_ecalsc/O");
   s->Branch("filter_badChCand",&filterbadChCandidate,"filter_badChCand/O");
+  s->Branch("filter_badPFMuon",&filterbadPFMuon,"filter_badPFMuon/O");
 
   //Leptons =====================================
   s->Branch("pfLepton_pt"             , &pfLepton_pt   );  
@@ -244,7 +246,10 @@ METScanningNtupleMaker::analyze(const Event& iEvent,
   Handle<bool> ifilterbadChCand;
   iEvent.getByToken(BadChCandF_token, ifilterbadChCand);
   filterbadChCandidate = *ifilterbadChCand;
-  
+ 
+  Handle<bool> ifilterbadPFMuon;
+  iEvent.getByToken(BadPFMuon_token, ifilterbadPFMuon);
+  filterbadPFMuon = *ifilterbadPFMuon; 
   
   // get Leptons
   Handle<reco::PFCandidateCollection> pfCandidates;

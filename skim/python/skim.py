@@ -226,6 +226,11 @@ process.eeBadScFilter.taggingMode = cms.bool(True)
 process.load('RecoMET.METFilters.BadChargedCandidateFilter_cfi')
 process.BadChargedCandidateFilter.taggingMode = cms.bool(True)
 
+
+process.load('RecoMET.METFilters.BadPFMuonFilter_cfi')
+process.BadPFMuonFilter.taggingMode = cms.bool(True)
+
+
 process.primaryVertexFilter = cms.EDFilter("GoodVertexFilter",
                                            vertexCollection = cms.InputTag('offlinePrimaryVertices'),
                                            minimumNDOF = cms.uint32(4) ,
@@ -284,7 +289,8 @@ process.metScanNtupleMaker = cms.EDAnalyzer("METScanningNtupleMaker",
                                             EERecHits=cms.InputTag("reducedEcalRecHitsEE"),
                                             ESRecHits=cms.InputTag("reducedEcalRecHitsES"),
                                             HcalNoise=cms.InputTag("hcalnoise"),
-                                            BadChCandFilter=cms.InputTag("BadChargedCandidateFilter")
+                                            BadChCandFilter=cms.InputTag("BadChargedCandidateFilter"),
+                                            BadPFMuon=cms.InputTag("BadPFMuonFilter")
 )
 
 # This part is needed if you want to update the BeamHaloSummary information
@@ -322,6 +328,7 @@ process.p = cms.Path(
     process.globalSuperTightHalo2016Filter * 
     process.HcalStripHaloFilter*
     process.BadChargedCandidateFilter*
+    process.BadPFMuonFilter*
     process.metScanNtupleMaker ##CH: writes a flat tree
     )
 
